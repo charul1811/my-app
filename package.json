@@ -3,6 +3,12 @@
   "license": "UNLICENSED",
   "type": "module",
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@material-ui/core": "^4.12.4",
+    "@mui/icons-material": "^6.0.0",
+    "@mui/material": "^6.0.0",
+    "@mui/styled-engine-sc": "^6.0.0",
     "@polymer/polymer": "3.5.1",
     "@vaadin/bundles": "24.4.5",
     "@vaadin/common-frontend": "0.0.19",
@@ -23,13 +29,15 @@
     "@vaadin/vaadin-material-styles": "24.4.5",
     "@vaadin/vaadin-themable-mixin": "24.4.5",
     "@vaadin/vaadin-usage-statistics": "2.1.2",
+    "axios": "^1.7.5",
     "construct-style-sheets-polyfill": "3.1.0",
     "date-fns": "2.29.3",
     "lit": "3.1.4",
     "proj4": "2.11.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-router-dom": "6.23.1"
+    "react-router-dom": "6.23.1",
+    "styled-components": "^6.1.12"
   },
   "devDependencies": {
     "@babel/preset-react": "7.24.7",
@@ -119,7 +127,7 @@
       "workbox-core": "7.1.0",
       "workbox-precaching": "7.1.0"
     },
-    "hash": "9e0d193c033f1b4eaf5a894dd08d897550065ef5c089b6fffa9b6f694c23c2ae"
+    "hash": "530d81742b63907e0cc50e9513d85ba4bff8f0f7564e710f4acf6741b28e2ace"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
@@ -159,6 +167,14 @@
     "@vaadin/react-components-pro": "$@vaadin/react-components-pro",
     "@vaadin/vaadin-themable-mixin": "$@vaadin/vaadin-themable-mixin",
     "@vaadin/vaadin-lumo-styles": "$@vaadin/vaadin-lumo-styles",
-    "@vaadin/vaadin-material-styles": "$@vaadin/vaadin-material-styles"
+    "@vaadin/vaadin-material-styles": "$@vaadin/vaadin-material-styles",
+    "@emotion/react": "$@emotion/react",
+    "@emotion/styled": "$@emotion/styled",
+    "@material-ui/core": "$@material-ui/core",
+    "@mui/icons-material": "$@mui/icons-material",
+    "@mui/material": "$@mui/material",
+    "@mui/styled-engine-sc": "$@mui/styled-engine-sc",
+    "axios": "$axios",
+    "styled-components": "$styled-components"
   }
 }

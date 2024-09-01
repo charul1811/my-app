@@ -3,7 +3,8 @@ import { useSignal } from '@vaadin/hilla-react-signals';
 import { Button } from '@vaadin/react-components/Button.js';
 import { Notification } from '@vaadin/react-components/Notification.js';
 import { TextField } from '@vaadin/react-components/TextField.js';
-import { HelloWorldService } from 'Frontend/generated/endpoints.js';
+import {HelloWorldService} from "Frontend/generated/endpoints";
+
 
 export const config: ViewConfig = { menu: { order: 1, icon: 'line-awesome/svg/atom-solid.svg' }, title: 'Welcome' };
 
@@ -11,7 +12,7 @@ export default function WelcomeView() {
   const name = useSignal('');
 
   return (
-    <>
+
       <section className="flex p-m gap-m items-end">
         <TextField
           label="Your name"
@@ -28,6 +29,6 @@ export default function WelcomeView() {
           Say hello
         </Button>
       </section>
-    </>
+
   );
 }
