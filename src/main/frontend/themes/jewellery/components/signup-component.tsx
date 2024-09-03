@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Grid, makeStyles} from "@material-ui/core";
 import {Link} from "react-router-dom";
-import {CartItemService, UserService} from "Frontend/generated/endpoints";
+import {UserService} from "Frontend/generated/endpoints";
 import {Notification} from "@vaadin/react-components/Notification";
 
 

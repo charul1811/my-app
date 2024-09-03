@@ -1,4 +1,4 @@
-package com.eeshania.application;
+package com.eeshania.application.controller;
 
 import com.eeshania.application.entities.Product;
 import com.eeshania.application.services.CartItemService;

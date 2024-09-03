@@ -13,7 +13,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 45px;
     padding: 50px;
-    color: var(--form-txt);
+    color: var(--red);
 }
 .form-header {
     grid-column: 1 / -1;
@@ -31,7 +31,7 @@ input {
     margin-top: 5px;
     background-color: rgba(255, 255, 255, 0);
     transition: all .5s ease-in;
-    color: var(--opac-white);
+    color: var(--red);
 }
 [type="submit"]{
     border: 0;

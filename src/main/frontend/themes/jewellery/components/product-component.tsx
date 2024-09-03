@@ -7,7 +7,6 @@ import {
 } from '@material-ui/core';
 import {Link} from "react-router-dom";
 import {CartItemService, ProductService} from "Frontend/generated/endpoints";
-import axios from "axios";
 import {Notification} from "@vaadin/react-components/Notification";
 
 
