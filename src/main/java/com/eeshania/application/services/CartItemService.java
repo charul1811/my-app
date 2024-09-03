@@ -50,4 +50,28 @@ ProductRepository productRepository;
 
     }
 
+
+    public List<CartItem> listAll() {
+
+
+        return cartItemRepository.findAll (); }
+
+
+    public CartItem increaseQuantity( int id ) {
+        cartItem = cartItemRepository.findById ( (long) id ).get();
+
+        cartItem.setQuantity ( cartItem.getQuantity () + 1 );
+        cartItemRepository.save ( cartItem );
+        return cartItem;
+    }
+
+    public CartItem decreaseQuantity( int id ) {
+        cartItem = cartItemRepository.findById ( (long) id ).get();
+        if(cartItem.getQuantity () > 1) {
+            cartItem.setQuantity ( cartItem.getQuantity () - 1 );
+            cartItemRepository.save ( cartItem );
+        }
+        return cartItem;
+    }
+
 }

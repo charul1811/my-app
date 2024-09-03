@@ -20,12 +20,15 @@ public class ProductService {
     private final ProductRepository productRepository;
     @Autowired
     public ProductService(ProductRepository productRepository) {
+
         this.productRepository = productRepository;
     }
 
     public void save(Product product) {
+
         productRepository.save(product);
     }
 
-    public List<Product> listAll() { return  productRepository.findAll (); }
+    public List<Product> listAll() {
+        return  productRepository.findAll (); }
 }
