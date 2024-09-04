@@ -2,7 +2,7 @@ import { ViewConfig } from '@vaadin/hilla-file-router/types.js';
 import ProductComponent from "Frontend/themes/jewellery/components/product-component";
 import {Button} from "@material-ui/core";
 import LoginComponent from "Frontend/themes/jewellery/components/login-component";
-import {Link} from "react-router-dom";
+import {BrowserRouter, BrowserRouterProps, Link} from "react-router-dom";
 import {login} from "@vaadin/hilla-frontend";
 
 export const config: ViewConfig = { menu: { order: 0, icon: 'line-awesome/svg/accusoft.svg' }, title: 'Home' };
@@ -19,6 +19,9 @@ interface HomeViewProps {
 }
 
 export default function HomeView({iconStyle}: HomeViewProps) {
+
+
+
   return (
     /*<div className="flex flex-col h-full items-center justify-center p-l text-center box-border">*/
 
@@ -32,3 +35,4 @@ export default function HomeView({iconStyle}: HomeViewProps) {
     </div>
   );
 }
+
