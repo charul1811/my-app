@@ -1,9 +1,6 @@
 import { ViewConfig } from '@vaadin/hilla-file-router/types.js';
 import ProductComponent from "Frontend/themes/jewellery/components/product-component";
-import {Button} from "@material-ui/core";
-import LoginComponent from "Frontend/themes/jewellery/components/login-component";
-import {BrowserRouter, BrowserRouterProps, Link} from "react-router-dom";
-import {login} from "@vaadin/hilla-frontend";
+import {Link} from "react-router-dom";
 
 export const config: ViewConfig = { menu: { order: 0, icon: 'line-awesome/svg/accusoft.svg' }, title: 'Home' };
 const topRight = {

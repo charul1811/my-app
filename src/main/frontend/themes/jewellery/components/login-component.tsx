@@ -24,30 +24,7 @@ const Login: React.FC = () => {
     };
 
     // Handle form submission
-    /*const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
 
-        try {
-            const response = await fetch('/api/users/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(user),
-            });
-
-            if (response.ok) {
-                setMessage('Login successful');
-                navigate('/home');
-                // Redirect to a dashboard or home page after login
-            } else {
-                const errorText = await response.text();
-                setMessage(`Login failed: ${errorText}`);
-            }
-        } catch (error) {
-            setMessage(`Error: ${error}`);
-        }
-    };*/
 
     return (
         <div>
