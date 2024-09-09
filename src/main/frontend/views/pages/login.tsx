@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link, NavLink, useNavigate} from 'react-router-dom';
+import {Link, NavLink, RouteObject, useNavigate} from 'react-router-dom';
 import {Grid} from "@material-ui/core";
 import {UserService} from "Frontend/generated/endpoints";
 import {Notification} from "@vaadin/react-components/Notification";
@@ -11,6 +11,8 @@ interface User {
     email: string;
     password: string;
 }
+
+
 
 const Login: React.FC = () => {
     const [user, setUser] = useState<User>({ email: '', password: '' });
@@ -74,5 +76,5 @@ const Login: React.FC = () => {
         </div>
     );
 };
-
+export const config: RouteObject     = { path: '/login', element: <Login /> };
 export default Login;

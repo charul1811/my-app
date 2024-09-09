@@ -1,13 +1,11 @@
 import {Routes, Route, RouterProvider} from 'react-router-dom';
 import {router} from "Frontend/routes/routes";
-import {createRoot} from "react-dom/client";
-import {createElement} from "react";
+import React from "react";
 
 function App() {
 
     return <RouterProvider router={ router}    />
 }
-const outlet = document.getElementById('outlet')!;
-let root = (outlet as any)._root ?? createRoot(outlet);
-(outlet as any)._root = root;
-root.render(createElement(App));
+
+
+export default App;
