@@ -1,9 +1,6 @@
 import { ViewConfig } from '@vaadin/hilla-file-router/types.js';
 import ProductComponent from "Frontend/themes/jewellery/components/product-component";
-import {Link, NavLink} from "react-router-dom";
 import React from "react";
-import LoginComponent from "Frontend/views/pages/login";
-
 
 
 export const config: ViewConfig = { menu: { order: 0, icon: 'line-awesome/svg/accusoft.svg' }, title: 'Home' };
@@ -30,11 +27,9 @@ export default function HomeView({iconStyle}: HomeViewProps) {
       <img style={{ width: '200px' }} src="images/logo%202.png" />
 
           <span {...{ theme: 'badge' }}>
-              <Link to="/login" style={topRight} className="link" >
 
-                  <img  width={"50 px"} src="images/img.png" alt="324" /> User Login
+<a href="/login" style={topRight} className="link"><img  width={"50 px"} src="images/img.png" alt="324" /> User Login</a>
 
-              </Link>
           </span>
       <h2>This place is intended for jewelry lovers</h2>
       <p>It’s a place where you can choose your style 🤗</p>
@@ -44,6 +39,7 @@ export default function HomeView({iconStyle}: HomeViewProps) {
 
 
 }
+
 
 
 

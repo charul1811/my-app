@@ -57,7 +57,7 @@ const Login: React.FC = () => {
                 <button type="submit"
                         onClick={ async () => {
                             const serverResponse = await UserService.getUserByEmail(user);
-                            Notification.show("Login Successful" + serverResponse);
+                            Notification.show( serverResponse);
                         }}
 
 

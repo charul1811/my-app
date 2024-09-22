@@ -36,23 +36,28 @@ import { RouterConfigurationBuilder } from '@vaadin/hilla-file-router/runtime.js
 import Flow from 'Frontend/generated/flow/Flow';
 import MainLayout from "Frontend/views/@layout";
 
-import LoginComponent from "Frontend/views/pages/login";
+import LoginComponent from "Frontend/views/login";
 import SignupComponent from "Frontend/themes/jewellery/components/signup-component";
+import fileRoutes from "Frontend/routes/file-routes";
+import CartComponent from "Frontend/views/cart-component";
+
 
 export const { router, routes } = new RouterConfigurationBuilder()
-
+    .withFileRoutes(fileRoutes)
     .withReactRoutes(
        [
            {
                element: <MainLayout />,
                handle: { title: 'Main' },
                children: [
-                  // { path: '/hilla', element: <HillaView />, handle: { title: 'Hilla' } }
+                   {path: '/login',element: <LoginComponent/>, handle: {title: 'login'}}
+                   // { path: '/hilla', element: <HillaView />, handle: { title: 'Hilla' } }
                ],
            },
                    {path: '/login',element: <LoginComponent/>, handle: {title: 'login'}},
 
                    {path:'/signup',element: <SignupComponent/>, handle: {title: 'signup'}},
+           {path:'/cart',element: <CartComponent/>, handle: {title: 'cart'}},
 
 
            ]
