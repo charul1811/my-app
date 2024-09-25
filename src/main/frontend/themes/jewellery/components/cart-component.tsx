@@ -36,13 +36,12 @@ const CartComponent = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
-    const classes = useStyles();
     useStyles();
     useEffect(() => {
         const fetchCartItems = async () => {
             try {
-                const cartItems: any[] = await CartItemService.listAll();
-
+                const cartItems = await CartItemService.listAll();
+                // @ts-ignore
                 setCartItems(prevState => {
                     return [...prevState, ...cartItems];
                 });
@@ -55,60 +54,41 @@ const CartComponent = () => {
             fetchCartItems();
             }, []);
 
-    const onRemoveItem = async (id: number) => {
-        try {
-             await CartItemService.removeItem(id)
-            const newList = cartItems.filter(item => item.id !== id);
-
-            setCartItems(newList);
-
-        } catch (err) {
-            setCartItems(prevState => {
-                return prevState.filter(item => item.id !== id);
-            })
-
-        }
-
-
-
-
-        setMessage('Quantity increased');
-    }
+    const onRemoveItem = async (id: number) => {    }
     const onIncreaseQuantity = async (id: number) => {
-
-           try {
-               await CartItemService.increaseQuantity(id);
-           } catch (err) {
-               setCartItems(prevState => {
-                   return prevState.map(item => {
-                       if (item.id === id) {
-                           return { ...item, quantity: item.quantity + 1 };
-                       }
-                       return item;
-                   });
-               });
-           }
-
-            setMessage('Quantity increased');
-
-    };
-
-    const onDecreaseQuantity = async (id: number) => {
         try {
-            await CartItemService.decreaseQuantity(id);
-        } catch (err) {
+            const cartItem = await CartItemService.increaseQuantity(id);
+            // @ts-ignore
             setCartItems(prevState => {
                 return prevState.map(item => {
                     if (item.id === id) {
-                        return { ...item, quantity: item.quantity - 1 };
+                        return cartItem;
                     }
                     return item;
                 });
             });
+            setMessage('Quantity increased');
+        } catch (err) {
+            setError('Failed to increase quantity');
         }
+    };
 
-        setMessage('Quantity increased');
-
+    const onDecreaseQuantity = async (id: number) => {
+        try {
+            const cartItem = await CartItemService.decreaseQuantity(id);
+            // @ts-ignore
+            setCartItems(prevState => {
+                return prevState.map(item => {
+                    if (item.id === id) {
+                        return cartItem;
+                    }
+                    return item;
+                });
+            });
+            setMessage('Quantity decreased');
+        } catch (err) {
+            setError('Failed to decrease quantity');
+        }
     };
 
         if (loading) {
@@ -124,20 +104,13 @@ const CartComponent = () => {
         }
 
         return (
-
-            <Container className={classes. productContainer}>
-                <div style={styles.container}>
-                    <h1>Shopping Cart</h1>
-                    {message && <p>{message}</p>}
-                    <button onClick={() => setMessage(null)}>Clear</button>
-                    <div style={styles.grid}>
-                     <div className="cart-item">
+                <div className="cart-item">
                     {cartItems.map(item => (
-                        <div className="cart-item" key={item.id}  style={styles.card}>
-                            <img src={item.product.imageUrl} alt={item.product.name} className="cart-item-image" style={styles.image} />
+                        <div className="cart-item" key={item.id}>
+                            <img src={item.product.imageUrl} alt={item.product.name} className="cart-item-image" />
                             <h3 className="cart-item-name">{item.product.name}</h3>
                             <p className="cart-item-price">${item.product.price.toFixed(2)}</p>
-                            <div className="cart-item-quantity" >
+                            <div className="cart-item-quantity">
                                 <button onClick={() => onDecreaseQuantity(item.id)}>-</button>
                                 <span>{item.quantity}</span>
                                 <button onClick={() => onIncreaseQuantity(item.id)}>+</button>
@@ -151,54 +124,13 @@ const CartComponent = () => {
                     </div>
                     ))
                     }
-                    </div>
-                    </div>
                 </div>
-
-
-            </Container>
             );
 
 
     };
 
 
-const styles = {
-    container: {
-        padding: '20px',
-        textAlign: 'left' as 'left',
-    },
-    grid: {
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-        gap: '16px',
-    },
-    card: {
-        border: '1px solid #ccc',
-        borderRadius: '8px',
-        padding: '16px',
-        textAlign: 'center' as 'center',
-    },
-    image: {
-        width: '100%',
-        height: 'auto',
-    },
-    name: {
-        fontSize: '18px',
-        margin: '10px 0',
-    },
-    price: {
-        fontSize: '16px',
-        margin: '10px 0',
-    },
-    button: {
-        backgroundColor: '#007BFF',
-        color: '#fff',
-        border: 'none',
-        borderRadius: '4px',
-        padding: '10px 15px',
-        cursor: 'pointer',
-    },
-};
+
 
 export default CartComponent;

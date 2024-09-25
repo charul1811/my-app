@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link, NavLink, RouteObject, useNavigate} from 'react-router-dom';
+import {Link, NavLink, useNavigate} from 'react-router-dom';
 import {Grid} from "@material-ui/core";
 import {UserService} from "Frontend/generated/endpoints";
 import {Notification} from "@vaadin/react-components/Notification";
@@ -11,8 +11,6 @@ interface User {
     email: string;
     password: string;
 }
-
-
 
 const Login: React.FC = () => {
     const [user, setUser] = useState<User>({ email: '', password: '' });
@@ -26,7 +24,30 @@ const Login: React.FC = () => {
     };
 
     // Handle form submission
+    /*const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
+        try {
+            const response = await fetch('/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user),
+            });
+
+            if (response.ok) {
+                setMessage('Login successful');
+                navigate('/home');
+                // Redirect to a dashboard or home page after login
+            } else {
+                const errorText = await response.text();
+                setMessage(`Login failed: ${errorText}`);
+            }
+        } catch (error) {
+            setMessage(`Error: ${error}`);
+        }
+    };*/
 
     return (
         <div>
@@ -57,7 +78,7 @@ const Login: React.FC = () => {
                 <button type="submit"
                         onClick={ async () => {
                             const serverResponse = await UserService.getUserByEmail(user);
-                            Notification.show( serverResponse);
+                            Notification.show("Login Successful" + serverResponse);
                         }}
 
 
@@ -76,5 +97,5 @@ const Login: React.FC = () => {
         </div>
     );
 };
-export const config: RouteObject     = { path: '/login', element: <Login /> };
+
 export default Login;

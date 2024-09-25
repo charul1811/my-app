@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,33 +15,23 @@ import java.math.BigDecimal;
 public class CartItem {
 
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
+    @OneToOne
     private Product product;
 
-    private int quantity=1;
+    private int quantity;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "shopping_cart_id")
+    @ManyToOne
     private ShoppingCart shoppingCart;
 
     @Id
     @GeneratedValue(generator = MyGenerator.generatorName, strategy = GenerationType.SEQUENCE)
     private Long id;
-    private double totalPrice;
+
+
 
 
     public CartItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
-
-    public  void setTotalPrice() {
-        this.totalPrice= (this.unitPrice() * this.quantity);
-    }
-
-    private int unitPrice() {
-        return (int) this.product.getPrice();
-    }
-
 }
