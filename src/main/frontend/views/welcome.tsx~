@@ -30,7 +30,7 @@ export default function WelcomeView() {
           >
               Say hello
           </Button>
-
+          <div><Login/></div>
       </section>
 
   );
