@@ -2,13 +2,17 @@ package com.eeshania.application.services;
 
 import com.eeshania.application.entities.CartItem;
 import com.eeshania.application.entities.Product;
+import com.eeshania.application.entities.ShoppingCart;
 import com.eeshania.application.repositories.CartItemRepository;
 import com.eeshania.application.repositories.ProductRepository;
+import com.eeshania.application.repositories.ShoppingCartRepository;
+import com.eeshania.application.repositories.UserRepository;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.hilla.BrowserCallable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @BrowserCallable
@@ -20,8 +24,16 @@ public class CartItemService {
 CartItemRepository cartItemRepository;
 @Autowired
 ProductRepository productRepository;
+@Autowired
+ShoppingCartRepository shoppingCartRepository;
+@Autowired
+ShoppingCartService shoppingCartService;
     CartItem cartItem = new CartItem();
-   List<CartItem> cartItems = new java.util.ArrayList<>();
+   List<CartItem> cartItems = new ArrayList<>();
+    @Autowired
+    private UserRepository userRepository;
+    ShoppingCart shoppingCart = new ShoppingCart();
+
 
     public void save(Product product) {
 
@@ -34,32 +46,74 @@ ProductRepository productRepository;
             cartItemNew.setProduct ( product );
             cartItemNew.setQuantity ( 1 );
             cartItemRepository.save ( cartItemNew );
+            cartItemNew.setShoppingCart(shoppingCart);
+            cartItems.add ( cartItemNew );
+            //cartItemNew.setTotalPrice();
+            cartItemNew.getShoppingCart().setId(shoppingCart.getId());
+            shoppingCart.setItems(cartItems);
+            //shoppingCartRepository.save ( shoppingCart );
+
         }
         else {
              int quantity = cartItemRepository.findCartItemByProduct ( product ).getQuantity ()+ 1;
 
             cartItem= cartItemRepository.findCartItemByProduct ( product );
             cartItem.setQuantity ( quantity );
+            cartItem.setShoppingCart(shoppingCart);
+            cartItemRepository.save ( cartItem );
+            cartItems.add ( cartItem );
+            //cartItem.setTotalPrice();
+            cartItem.getShoppingCart().setId(shoppingCart.getId());
+            shoppingCart.setItems(cartItems);
+            //shoppingCartRepository.save ( shoppingCart );
+
 
         }
-        cartItems.add ( cartItem );
 
-        cartItemRepository.save ( cartItem );
+
+
        // cartItemRepository.saveAll ( cartItems );
 
 
-    }
 
+    }
+public void addToCart(long cartid,long productid, int quantity){
+
+        ShoppingCart shoppingCart = shoppingCartService.getShoppingCart ( cartid );
+        Product product = productRepository.findById ( productid );
+
+        CartItem cartItem = shoppingCart.getItems().stream().
+                filter(item -> item.getProduct().getId() == product.getId())
+                .findFirst().orElse(new CartItem());
+
+       if (cartItem.getId() == 0) {
+           cartItem.setShoppingCart(shoppingCart);
+           cartItem.setProduct(product);
+           cartItem.setQuantity(quantity);
+           cartItem.setTotalPrice();
+           cartItemRepository.save(cartItem);
+       }
+       else {
+           cartItem.setQuantity(cartItem.getQuantity() + quantity);
+           cartItem.setTotalPrice();
+           cartItemRepository.save(cartItem);
+       }
+       shoppingCart.addItem(cartItem);
+       shoppingCartRepository.save(shoppingCart);
+
+
+}
 
     public List<CartItem> listAll() {
 
-
-        return cartItemRepository.findAll (); }
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.setItems( cartItemRepository.findAll () );
+            shoppingCartRepository.save(shoppingCart);
+            return cartItemRepository.findAll (); }
 
 
     public CartItem increaseQuantity( int id ) {
         cartItem = cartItemRepository.findById ( (long) id ).get();
-
         cartItem.setQuantity ( cartItem.getQuantity () + 1 );
         cartItemRepository.save ( cartItem );
         return cartItem;
@@ -74,4 +128,7 @@ ProductRepository productRepository;
         return cartItem;
     }
 
-}
+public  void removeItem( int id ) {
+    cartItemRepository.deleteById ( (long) id );
+
+    }}
