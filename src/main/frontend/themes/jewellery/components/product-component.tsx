@@ -107,7 +107,7 @@ const ProductComponent: React.FC = () => {
                             <Button
                                 className="addToCart"
                                 onClick={async () => {
-                                    const response = await CartItemService.save( product);
+                                    const response = await CartItemService.save(product);
                                     Notification.show("Product added to cart");
                                 }}
                                 variant="contained"
