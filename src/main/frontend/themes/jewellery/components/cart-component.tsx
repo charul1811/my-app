@@ -123,13 +123,19 @@ const CartComponent = () => {
         return <Typography>No product found.</Typography>;
     }
 
+    function onRemove() {
+        CartItemService.clearCart();
+        setCartItems([]);
+
+    }
+
     return (
 
         <Container className={classes. productContainer}>
             <div style={styles.container}>
                 <h1>Shopping Cart</h1>
                 {message && <p>{message}</p>}
-                <button onClick={() => setMessage(null)}>Clear</button>
+                <button onClick={() => onRemove()}>Clear</button>
                 <div style={styles.grid}>
                     <div className="cart-item">
                         {cartItems.map(item => (

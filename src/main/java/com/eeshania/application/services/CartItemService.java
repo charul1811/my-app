@@ -1,6 +1,7 @@
 package com.eeshania.application.services;
 
 import com.eeshania.application.entities.CartItem;
+import com.eeshania.application.entities.Order;
 import com.eeshania.application.entities.Product;
 import com.eeshania.application.entities.ShoppingCart;
 import com.eeshania.application.repositories.CartItemRepository;
@@ -19,6 +20,13 @@ import java.util.List;
 @AnonymousAllowed
 @Service
 public class CartItemService {
+@Autowired
+    public CartItemService(CartItemRepository cartItemRepository, ProductRepository productRepository, ShoppingCartRepository shoppingCartRepository, ShoppingCartService shoppingCartService) {
+        this.cartItemRepository = cartItemRepository;
+        this.productRepository = productRepository;
+        this.shoppingCartRepository = shoppingCartRepository;
+        this.shoppingCartService = shoppingCartService;
+    }
 
     @Autowired
 CartItemRepository cartItemRepository;
@@ -32,7 +40,9 @@ ShoppingCartService shoppingCartService;
    List<CartItem> cartItems = new ArrayList<>();
     @Autowired
     private UserRepository userRepository;
+
     ShoppingCart shoppingCart = new ShoppingCart();
+    Order order = new Order();
 
 
     public void save(Product product) {
@@ -56,15 +66,22 @@ ShoppingCartService shoppingCartService;
         }
         else {
              int quantity = cartItemRepository.findCartItemByProduct ( product ).getQuantity ()+ 1;
+            cartItemRepository.findCartItemByProduct ( product );
+            CartItem cartItemNew= new CartItem();
+            cartItemNew= cartItemRepository.findCartItemByProduct ( product );
+            cartItemRepository.updateCartItemById (cartItemNew.getId(),quantity);
 
-            cartItem= cartItemRepository.findCartItemByProduct ( product );
-            cartItem.setQuantity ( quantity );
-            cartItem.setShoppingCart(shoppingCart);
-            cartItemRepository.save ( cartItem );
-            cartItems.add ( cartItem );
+           /* cartItemNew.setProduct ( product );
+            cartItemNew.setQuantity ( quantity );
+
+
+            cartItemRepository.save ( cartItemNew );*/
+            cartItemNew.setShoppingCart(shoppingCart);
+            cartItems.add ( cartItemNew );
             //cartItem.setTotalPrice();
-            cartItem.getShoppingCart().setId(shoppingCart.getId());
+            cartItemNew.getShoppingCart().setId(shoppingCart.getId());
             shoppingCart.setItems(cartItems);
+            order.setItems(cartItems);
             //shoppingCartRepository.save ( shoppingCart );
 
 
@@ -131,4 +148,15 @@ public void addToCart(long cartid,long productid, int quantity){
 public  void removeItem( int id ) {
     cartItemRepository.deleteById ( (long) id );
 
-    }}
+    }
+
+
+public void clearCart(  ) {
+    /*shoppingCart = shoppingCartRepository.findById ( (long) id ).get();
+    shoppingCart.getItems().clear();
+    shoppingCartRepository.save ( shoppingCart );*/
+    cartItemRepository.deleteAll();
+    shoppingCartRepository.deleteAll();
+}
+}
+

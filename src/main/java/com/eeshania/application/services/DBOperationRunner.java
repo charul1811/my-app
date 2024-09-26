@@ -20,10 +20,11 @@ public class DBOperationRunner implements CommandLineRunner {
 
            eRepo.saveAll( Arrays.asList(
 
-                      new Product ("Isabel","https://www.orra.co.in/media/catalog/product/cache/fae84d45891aba1e98b5a417448a6ddb/o/p/opd24g03_copy.jpg",2599.5),
-                      new Product("Michael","https://www.orra.co.in/media/catalog/product/cache/fae84d45891aba1e98b5a417448a6ddb/o/p/opd24g03_copy.jpg",2999.0),
-                      new Product("Thomas","https://www.orra.co.in/media/catalog/product/cache/fae84d45891aba1e98b5a417448a6ddb/o/p/opd24g03_copy.jpg",2699.5)
-
+                      new Product ("Gold","https://www.orra.co.in/media/catalog/product/cache/fae84d45891aba1e98b5a417448a6ddb/o/p/opd24g03_copy.jpg",2599.5),
+                      new Product("Diamondl","https://www.tanishq.co.in/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dweea9fbc4/images/hi-res/51D3B1BGEAA00_2.jpg",2999.0),
+                      new Product("silver","https://www.tanishq.co.in/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dwe4bf267c/images/hi-res/510122FAAAA00_1.jpg",2289.5),
+                      new Product("silver","https://www.orra.co.in/media/catalog/product/cache/fae84d45891aba1e98b5a417448a6ddb/o/p/opd24g03_copy.jpg",2179.5),
+                      new Product("silver","https://www.tanishq.co.in/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dw639a9719/images/hi-res/5031202KTAGA02_2.jpg",1899.5)
            ));
 
 

@@ -15,19 +15,22 @@ import java.util.List;
 @Entity
 public class Order {
 
+    @Getter
+    @Setter
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
 
-    @OneToMany
-    private List<CartItem> items;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "shopping_cart_id")
+    private List<CartItem> Items;
+
+
     private BigDecimal totalPrice;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @Getter
-    @Setter
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
 
 }
